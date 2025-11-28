@@ -55,7 +55,7 @@ Penelitian ini menganalisis hubungan antara jam belajar per minggu dengan Indeks
 ## 🔍 HASIL ANALISIS
 
 ### **Model Regresi**
-IPK = 62.78 + 0.00042 × Jam_Belajar
+IPK = 3.260034 + 0.00009339772 × Belajar
 
 
 ### **Statistik Model**
@@ -73,16 +73,16 @@ IPK = 62.78 + 0.00042 × Jam_Belajar
 ## 📈 VISUALISASI DATA
 
 ### **Scatterplot dengan Garis Regresi**
-![Scatterplot](visuals/http://127.0.0.1:26897/chunk_output/s/8ABF91E5/cpytu8z3cbpz1/00002a.png?resize=20)
+![Scatterplot](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/Scatterplot.jpg)
 
 ### **Distribusi Jam Belajar**
-![Histogram Jam Belajar](visuals/http://127.0.0.1:26897/chunk_output/s/8ABF91E5/cj8yalyppw4ws/000028.png?resize=21)
+![Histogram Jam Belajar](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/jam%20belajar.jpg)
 
 ### **Distribusi IPK**
-![Histogram IPK](visuals/http://127.0.0.1:26897/chunk_output/s/8ABF91E5/cfcyp8i3uo3rt/000018.png?resize=22)
+![Histogram IPK](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/ipk.jpg)
 
 ### **Distribusi Residuals**
-![Histogram Residuals](visuals/http://127.0.0.1:26897/chunk_output/s/8ABF91E5/ceztl04o2p7kt/000019.png?resize=23)
+![Histogram Residuals](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/residual.jpg)
 
 ---
 
