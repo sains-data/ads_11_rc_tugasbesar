@@ -18,7 +18,7 @@
 
 ## 📋 ABSTRAK
 
-Penelitian ini menganalisis hubungan antara jam belajar per minggu dengan Indeks Prestasi Kumulatif (IPK) mahasiswa Institut Teknologi Sumatera (ITERA) menggunakan metode regresi linier sederhana. Data dikumpulkan lebih dari 400  responden mahasiswa ITERA dengan variabel independen jam belajar per minggu dan variabel dependen IPK. Hasil analisis menunjukkan tidak terdapat hubungan yang signifikan secara statistik antara kedua variabel tersebut, dengan koefisien determinasi (R-squared) sebesar 0.5% dan nilai p-value 0.194.
+Penelitian ini menganalisis hubungan antara jam belajar per minggu dengan Indeks Prestasi Kumulatif (IPK) mahasiswa Institut Teknologi Sumatera (ITERA) menggunakan metode regresi linier sederhana. Data dikumpulkan lebih dari 400  responden mahasiswa ITERA dengan variabel independen jam belajar per minggu dan variabel dependen IPK. Hasil analisis menunjukkan tidak terdapat hubungan yang signifikan secara statistik antara kedua variabel tersebut, dengan koefisien determinasi (R-squared) sebesar 0.5% dan nilai p-value 0.5747.
 
 ---
 
