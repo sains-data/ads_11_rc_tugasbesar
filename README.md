@@ -84,6 +84,8 @@ IPK = 3.260034 + 0.00009339772 × Belajar
 ### **Distribusi Residuals**
 ![Histogram Residuals](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/residual.jpg)
 
+### **Prediksi IPK vs Jam Belajar per minggu**
+![Regresi Linier](https://github.com/sains-data/ads_11_rc_tugasbesar/blob/0709087ec00bf3ae947f6f994b209cddc54ae2a8/prediksi%20ipk.jpg)
 ---
 
 ## 💡 PEMBAHASAN
