@@ -1,0 +1,250 @@
+---
+title: "codeR_11_RC"
+author: "Kelompok11"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 1. LIBRARY
+# ===============================
+
+library(readr)    # baca CSV
+library(dplyr)    # manipulasi data
+library(ggplot2)  # visualisasi
+library(lattice)  # scatterplot alternatif
+
+
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 2. BACA DATA
+# ===============================
+
+
+# Pastikan file CSV ada di working directory RStudio
+zona <- read_csv("C:/Users/user/Downloads/Dataset Tugas Besar ADS 2025 - Karakteristik Mahasiswa .csv")
+View(zona)
+
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 3. BERSIHKAN DATA NUMERIK
+# ===============================
+
+
+# Ambil angka dari kolom belajar dan IPK
+zona$Belajar <- as.numeric(gsub("[^0-9\\.]", "", zona$`Rata-rata belajar perminggu (dalam jam) :`))
+zona$IPK     <- as.numeric(gsub("[^0-9\\.]", "", zona$`IPK Terakhir :`))
+
+# Hapus baris NA jika ada
+zona <- na.omit(zona)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 4. HILANGKAN OUTLIER IPK > 4
+# ===============================
+
+zona <- zona %>% filter(IPK <= 4)
+
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 5. REGRESI LINEAR
+# ===============================
+model <- lm(IPK ~ Belajar, data = zona)
+summary(model)
+
+# Ambil koefisien
+a <- coef(model)[1]   # intercept
+b <- coef(model)[2]   # slope
+cat("Intercept (a):", a, "\n")
+cat("Slope (b):", b, "\n")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 6. VISUALISASI REGRESI
+# ===============================
+
+
+# Menggunakan ggplot
+
+ggplot(zona, aes(x = Belajar, y = IPK)) +
+  geom_point(aes(color = cut(IPK, c(0, 2, 3, 4))), size = 3) +
+  geom_smooth(method = "lm", color = "red") +
+  scale_x_continuous(
+    limits = c(0, 30),
+    breaks = seq(0, 30, 5)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 4),
+    breaks = seq(0, 4, 0.5)
+  ) +
+  scale_color_manual(values = c("red", "orange", "green"),
+                     name = "Kategori IPK",
+                     labels = c("Rendah (0-2)", "Sedang (2-3)", "Tinggi (3-4)")) +
+  labs(title = "Prediksi IPK Berdasarkan Jam Belajar",
+       x = "Jam Belajar/Minggu", y = "IPK") +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "transparent"),
+    plot.background = element_rect(fill = "transparent", color = NA)
+  )
+
+# Untuk ggplot simpan dengan background transparan
+ggsave("scatterplot_IPK.png", 
+       bg = "transparent",
+       width = 10, height = 6)
+
+# Menggunakan lattice
+
+xyplot(
+  IPK ~ Belajar,
+  data = zona,
+  main = "Scatterplot dengan lattice",
+  scales = list(
+    x = list(
+      at = seq(0, 30, 10),
+      limits = c(0, 30)
+    ),
+    y = list(              # Tambahkan skala untuk y
+      at = seq(0, 4, 1),   # Breaks setiap 1
+      limits = c(0, 4)     # Batas 0-4
+    )
+  )
+)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+# ===============================
+# 7. PERHITUNGAN MANUAL (mirip Python)
+# ===============================
+x <- zona$Belajar
+y <- zona$IPK
+
+n <- length(x)
+mean_x <- mean(x)
+mean_y <- mean(y)
+
+# slope
+b_manual <- sum((x - mean_x) * (y - mean_y)) / sum((x - mean_x)^2)
+
+# intercept
+a_manual <- mean_y - b_manual * mean_x
+
+# prediksi
+y_pred <- a_manual + b_manual * x
+
+# Menghitung t-hitung
+SE_b <- sqrt(sum((y - y_pred)^2) / (n - 2)) / sqrt(sum((x - mean_x)^2))
+
+t_hitung <- b_manual / SE_b
+
+# t-tabel
+t_tabel <- qt(0.975, df = n - 2)
+
+cat("standar ERROR=", SE_b, "\n")
+cat("b manual =", b_manual, "\n")
+cat("a manual =", a_manual, "\n")
+cat("t hitung =", t_hitung, "\n")
+cat("t tabel =", t_tabel, "\n")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+#============================================
+# 8. Visualisasi Distribusi Jam Belajar/Minggu
+#=============================================
+ggplot(zona, aes(x = Belajar)) +
+  geom_histogram(fill = "skyblue", color = "black", bins = 15, alpha = 0.7) +
+  scale_x_continuous(
+    breaks = seq(0, 30, 5),
+    limits = c(0, 30)
+  ) +
+  labs(title = "Distribusi Jam Belajar per Minggu",
+       x = "Jam Belajar / minggu",
+       y = "Frekuensi") +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "transparent"),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.grid = element_blank()
+  )
+
+ggsave("histogram_jam_belajar.png", 
+       bg = "transparent",
+       width = 8, height = 6)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+#============================================
+# 9. Visualisasi Distribusi IPK
+#=============================================
+
+ggplot(zona, aes(x = IPK)) +
+  geom_histogram(fill = "lightgreen", color = "black", bins = 12, alpha = 0.7) +
+  scale_x_continuous(
+    breaks = seq(0, 4, 0.5),
+    limits = c(0, 4)
+  ) +
+  labs(title = "Distribusi IPK Mahasiswa",
+       x = "IPK",
+       y = "Frekuensi") +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "transparent"),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.grid = element_blank()
+  )
+
+ggsave("histogram_IPK.png", 
+       bg = "transparent",
+       width = 8, height = 6)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+#============================================
+# 10. Visualisasi Distribusi Residual Model Regresi
+#=============================================
+
+# Hitung residuals dari model 
+residual_data <- residuals(model)
+
+# Buat data frame untuk ggplot
+residual_df <- data.frame(Residual = residual_data)
+
+# Plot histogram
+ggplot(residual_df, aes(x = Residual)) +
+  geom_histogram(fill = "coral", color = "black", bins = 15, alpha = 0.7) +
+  labs(title = "Distribusi Residuals Model Regresi",
+       x = "Residuals (Selisih Prediksi vs Aktual)",
+       y = "Frekuensi") +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "transparent"),
+    plot.background = element_rect(fill = "transparent", color = NA),
+    panel.grid = element_blank()
+  )
+
+# Simpan
+ggsave("histogram_residuals.png", 
+       bg = "transparent",
+       width = 8, height = 6)
+```
