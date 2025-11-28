@@ -51,6 +51,23 @@ Penelitian ini menganalisis hubungan antara jam belajar per minggu dengan Indeks
 - **Git** untuk version control
 
 ---
+## 📁 Struktur Repository
+sains-data/
+├── 📁 analysis/
+│   ├── CodeR_11_RC.Rmd
+│   └── OutputR_11_RC.Rmd
+├── 📁 data/
+│   └── Tubes_11_RC.csv
+├── 📁 infographic/
+│   ├── Infografis_11_RC.pdf
+│   └── Infografis_11_RC.png
+├── 📁 images/
+│   ├── Scatterplot.jpg
+│   ├── ipk.jpg
+│   ├── jam-belajar.jpg
+│   ├── prediksi-ipk.jpg
+│   └── residual.jpg
+└── README.md
 
 ## 🔍 HASIL ANALISIS
 
