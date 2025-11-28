@@ -52,20 +52,26 @@ Penelitian ini menganalisis hubungan antara jam belajar per minggu dengan Indeks
 
 ---
 ## 📁 Struktur Repository
-sains-data/
-├── 📁 analysis/
-│   ├── CodeR_11_RC.Rmd
-│   └── OutputR_11_RC.Rmd
-├── 📁 data/
-│   └── Tubes_11_RC.csv
-├── 📁 infographic/
-│   ├── Infografis_11_RC.pdf
-│   └── Infografis_11_RC.png
-├── 📁 images/
-│   ├── Scatterplot.jpg
-│   ├── ipk.jpg
-│   ├── jam-belajar.jpg
-│   ├── prediksi-ipk.jpg
+# Data Analysis Project - Kelas 11 RC
+
+## File Structure
+- `CodeR_11_RC.Rmd` - Main analysis code
+- `OutputR_11_RC.Rmd` - Analysis output  
+- `Tubes_11_RC.csv` - Dataset
+- `Infografis_11_RC_FIX.pdf` - Infographic PDF
+- `Infografis_11_RC_FIX.png` - Infographic PNG
+
+## Visualizations
+1. Scatter Plot
+2. IPK
+3. Jam Belajar
+4. Prediksi
+5. Residual
+
+## How to Run
+1. Buka `CodeR_11_RC.Rmd` di RStudio
+2. Pastikan `Tubes_11_RC.csv` benar-benar ada
+3. Jalankan kode
 │   └── residual.jpg
 └── README.md
 
